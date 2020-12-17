@@ -1,0 +1,41 @@
+{
+  "trello": {
+    "boards": [],
+    "key": "",
+    "token": "",
+    "pollFrequency": 10,
+    "events": {
+      "createCard": true,
+      "updateCard": {
+        "name": true,
+        "description": true,
+        "position": false,
+        "dueDate": true,
+        "list": true,
+        "archive": true
+      },
+      "deleteCard": true,
+      "commentCard": true,
+      "addMemberToCard": true,
+      "removeMemberFromCard": true,
+      "createList": true,
+      "updateList": {
+        "name": true,
+        "position": false,
+        "archive": true
+      }
+    }
+  },
+
+  "discord": {
+    "token": "",
+    "server": "",
+    "channel": ""
+  },
+
+  "users": {
+    "trello": "000000000000000000"
+  },
+
+  "debug": false
+}

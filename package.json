@@ -1,0 +1,18 @@
+{
+  "name": "trellobot",
+  "version": "0.1.0",
+  "description": "",
+  "main": "trellobot.js",
+  "scripts": {
+    "start": "node trellobot.js"
+  },
+  "keywords": [],
+  "author": "Vollorak",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "trello": "^0.10.1-rc.0",
+    "bufferutil": "^4.0.2",
+    "utf-8-validate": "^5.0.3"
+  }
+}
