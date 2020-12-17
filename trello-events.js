@@ -1,8 +1,39 @@
-const Trello = require('trello');
+const needle = require('needle');
 const EventEmitter = require('events').EventEmitter;
 
 let e = new EventEmitter();
 let trello;
+
+const Trello = function (key, token) {
+
+    this.uri = "https://api.trello.com";
+
+    this.makeCall = function (method, options = []) {
+        let call = `${this.uri}/1/${method}?key=${key}&token=${token}`;
+        for (let i in options) call = `${call}&${options[i].key}=${options[i].value}`;
+        return call;
+    }
+
+    this.getMember = function (id, callback) {
+        console.log(`***HELLO*** ${this.makeCall(`members/${id}`)}`)
+        needle('get', this.makeCall(`members/${id}`))
+            .then(res => callback(res.body))
+            .catch(err => callback(null, err));
+    }
+
+    this.getBoards = function (id, callback) {
+        needle('get', this.makeCall(`members/${id}/boards`))
+            .then(res => callback(res.body))
+            .catch(err => callback(null, err));
+    }
+
+    this.getActionsOnBoard = function (id, callback) {
+        needle('get', this.makeCall(`boards/${id}/actions`))
+            .then(res => callback(res.body))
+            .catch(err => callback(null, err));
+    }
+
+}
 
 module.exports = function () {
 
@@ -20,7 +51,7 @@ module.exports = function () {
 
         trello = new Trello(key, token);
 
-        trello.getMember('me', (err, res) => {
+        trello.getMember('me', (res, err) => {
             if (err) {
                 e.emit('error', err);
                 return;
@@ -37,7 +68,7 @@ module.exports = function () {
 function start(t) {
 
     if (t.boards.length === 0) {
-        trello.getBoards('me', (err, res) => {
+        trello.getBoards('me', (res, err) => {
             if (err) {
                 e.emit('error', err);
                 clearInterval(interval);
@@ -49,14 +80,14 @@ function start(t) {
     }
 
     getActions(t);
-    var interval = setInterval(() => getActions(t), t.frequency * 1000);
+    let interval = setInterval(() => getActions(t), t.frequency * 1000);
 
 }
 
 function getActions(t) {
 
     t.boards.forEach((board) => {
-        trello.getActionsOnBoard(board, (err, res) => {
+        trello.getActionsOnBoard(board, (res, err) => {
 
             if (err) {
                 e.emit('error', err);
