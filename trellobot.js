@@ -76,7 +76,7 @@ trello.on('ready', (user) => {
 
 // Saves the last action that was processed.
 trello.on('updateActionId', (id) => {
-    if (lastActionId >= id) return;
+    if (lastActionId === id) return;
     lastActionId = id;
     fs.writeFileSync('.lastActionId', id.toString());
 });
