@@ -1,6 +1,6 @@
 # Trellobot
 
-Trellobot is a Discord bot that reports activities on Trello. This project is a combination and updated version of several other depositories including [Trellobot](https://github.com/Angush/trellobot/blob/master/readme.md), [trello-events](https://github.com/atuttle/node-trello-events) and [trello](https://github.com/norberteder/trello).
+Trellobot is a simple Discord bot that reports activities on Trello. This project is a combination and updated version of several other depositories including [Trellobot](https://github.com/Angush/trellobot/blob/master/readme.md), [trello-events](https://github.com/atuttle/node-trello-events) and [trello](https://github.com/norberteder/trello).
 
 ## Installation
 1. Clone the repository.
@@ -104,3 +104,9 @@ _Disclaimer: None of the values below are real. If they are, it is purely coinci
   "debug": false
 }
 ```
+
+## Planned Features
+
+- Support more Trello actions.
+- Support claiming and abandoning cards from Discord.
+- Support querying card and board information from Discord.
